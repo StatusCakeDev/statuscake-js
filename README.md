@@ -1,4 +1,4 @@
-# statuscake-js
+# statuscake-js ![test](https://github.com/StatusCakeDev/statuscake-js/workflows/test/badge.svg)
 
 **NOTE**: This library is in alpha and not production ready. Whilst it can be
 used we will not offer support until it is generally available.
