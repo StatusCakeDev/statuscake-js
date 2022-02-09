@@ -21,7 +21,11 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^4.0"
   },
   "publishConfig": {
     "registry": "https://github.com/StatusCakeDev/statuscake-js"
