@@ -1,7 +1,11 @@
 # statuscake-js
 
-This README outlines the details of collaborating on this JavaScript package. A
-short introduction of this package could easily go here.
+**NOTE**: This library is in alpha and not production ready. Whilst it can be
+used we will not offer support until it is generally available.
+
+The JavaScript implementation of the [StatusCake
+API](https://www.statuscake.com/api/v1) client. Documentation for this library
+can be found [here](https://www.statuscake.com/api/v1).
 
 ## Prerequisites
 
