@@ -1,0 +1,29 @@
+{
+  "name": "@statuscake/statuscake-js",
+  "version": "1.0.0-beta.1",
+  "description": "SDK client for @statuscake/statuscake-js",
+  "keywords": [
+    "sdk",
+    "statuscake",
+    "javascript"
+  ],
+  "repository": "https://github.com/StatusCakeDev/statuscake-js",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Support",
+    "email": "support@statuscake.com",
+    "url": "https://www.statuscake.com"
+  },
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "registry": "https://github.com/StatusCakeDev/statuscake-js"
+  }
+}
