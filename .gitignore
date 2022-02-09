@@ -1,0 +1,23 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/doc
+
+# dependencies
+/bower_components
+/node_modules
+
+# misc
+/.nyc_output
+/.sass-cache
+/connect.lock
+/coverage/
+/libpeerconnection.log
+/npm-debug.log*
+/yarn-error.log
+
+# for a library or package, you might want to ignore these files since the code
+# is intended to run in multiple environments; otherwise, check them in:
+.node-version
+.nvmrc
