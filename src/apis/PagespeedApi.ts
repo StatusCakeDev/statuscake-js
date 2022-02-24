@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -77,7 +77,13 @@ export interface GetPagespeedTestRequest {
 
 export interface ListPagespeedTestHistoryRequest {
   testId: string;
-  days?: number;
+  limit?: number;
+  before?: number;
+}
+
+export interface ListPagespeedTestsRequest {
+  page?: number;
+  limit?: number;
 }
 
 export interface UpdatePagespeedTestRequest {
@@ -179,7 +185,8 @@ export interface PagespeedApiInterface {
    * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
    * @summary Get all pagespeed check history
    * @param {string} testId Pagespeed check ID
-   * @param {number} [days] Number of days to returns
+   * @param {number} [limit] The number of results to return from the series
+   * @param {number} [before] Only results created before this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof PagespeedApiInterface
@@ -201,11 +208,14 @@ export interface PagespeedApiInterface {
   /**
    * Returns a list of pagespeed checks for an account.
    * @summary Get all pagespeed checks
+   * @param {number} [page] Page of results
+   * @param {number} [limit] The number of pagespeed checks to return per page
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof PagespeedApiInterface
    */
   listPagespeedTestsRaw(
+    requestParameters: ListPagespeedTestsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<PagespeedTests>>;
 
@@ -213,7 +223,10 @@ export interface PagespeedApiInterface {
    * Returns a list of pagespeed checks for an account.
    * Get all pagespeed checks
    */
-  listPagespeedTests(initOverrides?: RequestInit): Promise<PagespeedTests>;
+  listPagespeedTests(
+    requestParameters: ListPagespeedTestsRequest,
+    initOverrides?: RequestInit,
+  ): Promise<PagespeedTests>;
 
   /**
    * Updates a pagespeed check with the given parameters.
@@ -535,8 +548,12 @@ export class PagespeedApi extends runtime.BaseAPI
 
     const queryParameters: any = {};
 
-    if (requestParameters.days !== undefined) {
-      queryParameters['days'] = requestParameters.days;
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
+
+    if (requestParameters.before !== undefined) {
+      queryParameters['before'] = requestParameters.before;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -579,9 +596,18 @@ export class PagespeedApi extends runtime.BaseAPI
    * Get all pagespeed checks
    */
   async listPagespeedTestsRaw(
+    requestParameters: ListPagespeedTestsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<PagespeedTests>> {
     const queryParameters: any = {};
+
+    if (requestParameters.page !== undefined) {
+      queryParameters['page'] = requestParameters.page;
+    }
+
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
 
     const headerParameters: runtime.HTTPHeaders = {};
 
@@ -605,9 +631,13 @@ export class PagespeedApi extends runtime.BaseAPI
    * Get all pagespeed checks
    */
   async listPagespeedTests(
+    requestParameters: ListPagespeedTestsRequest = {},
     initOverrides?: RequestInit,
   ): Promise<PagespeedTests> {
-    const response = await this.listPagespeedTestsRaw(initOverrides);
+    const response = await this.listPagespeedTestsRaw(
+      requestParameters,
+      initOverrides,
+    );
     return await response.value();
   }
 

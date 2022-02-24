@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -105,19 +105,20 @@ export interface GetUptimeTestRequest {
 
 export interface ListUptimeTestAlertsRequest {
   testId: string;
-  start?: number;
   limit?: number;
+  before?: number;
 }
 
 export interface ListUptimeTestHistoryRequest {
   testId: string;
-  start?: number;
-  end?: number;
   limit?: number;
+  before?: number;
 }
 
 export interface ListUptimeTestPeriodsRequest {
   testId: string;
+  limit?: number;
+  before?: number;
 }
 
 export interface ListUptimeTestsRequest {
@@ -271,8 +272,8 @@ export interface UptimeApiInterface {
    * Returns a list of uptime check alerts for a given id.
    * @summary Get all uptime check alerts
    * @param {string} testId Uptime check ID
-   * @param {number} [start] Only results since this UNIX timestamp will be returned
-   * @param {number} [limit] The number of results to return
+   * @param {number} [limit] The number of uptime alerts to return per page
+   * @param {number} [before] Only alerts triggered before this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -295,9 +296,8 @@ export interface UptimeApiInterface {
    * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
    * @summary Get all uptime check history
    * @param {string} testId Uptime check ID
-   * @param {number} [start] Only results since this UNIX timestamp will be returned
-   * @param {number} [end] Only results up to this UNIX timestamp will be returned
-   * @param {number} [limit] The number of results to return
+   * @param {number} [limit] The number of results to return per page
+   * @param {number} [before] Only results created before this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -317,9 +317,11 @@ export interface UptimeApiInterface {
   ): Promise<UptimeTestHistory>;
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  A maximum of 20 results will be returned. This is to reduce performance issues when making requests for uptime checks with a large number of periods.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
    * @summary Get all uptime check periods
    * @param {string} testId Uptime check ID
+   * @param {number} [limit] The number of uptime check periods to return per page
+   * @param {number} [before] Only check periods created before this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -330,7 +332,7 @@ export interface UptimeApiInterface {
   ): Promise<runtime.ApiResponse<UptimeTestPeriods>>;
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  A maximum of 20 results will be returned. This is to reduce performance issues when making requests for uptime checks with a large number of periods.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
    * Get all uptime check periods
    */
   listUptimeTestPeriods(
@@ -343,7 +345,7 @@ export interface UptimeApiInterface {
    * @summary Get all uptime checks
    * @param {'down' | 'up'} [status] Uptime check status
    * @param {number} [page] Page of results
-   * @param {number} [limit] The number of results to return per page
+   * @param {number} [limit] The number of uptime checks to return per page
    * @param {string} [tags] Comma separated list of tags assocaited with a check
    * @param {boolean} [matchany] Include uptime checks in response that match any specified tag or all tags
    * @param {boolean} [nouptime] Do not calculate uptime percentages for results
@@ -823,12 +825,12 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
 
     const queryParameters: any = {};
 
-    if (requestParameters.start !== undefined) {
-      queryParameters['start'] = requestParameters.start;
-    }
-
     if (requestParameters.limit !== undefined) {
       queryParameters['limit'] = requestParameters.limit;
+    }
+
+    if (requestParameters.before !== undefined) {
+      queryParameters['before'] = requestParameters.before;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -886,16 +888,12 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
 
     const queryParameters: any = {};
 
-    if (requestParameters.start !== undefined) {
-      queryParameters['start'] = requestParameters.start;
-    }
-
-    if (requestParameters.end !== undefined) {
-      queryParameters['end'] = requestParameters.end;
-    }
-
     if (requestParameters.limit !== undefined) {
       queryParameters['limit'] = requestParameters.limit;
+    }
+
+    if (requestParameters.before !== undefined) {
+      queryParameters['before'] = requestParameters.before;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -934,7 +932,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  A maximum of 20 results will be returned. This is to reduce performance issues when making requests for uptime checks with a large number of periods.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
    * Get all uptime check periods
    */
   async listUptimeTestPeriodsRaw(
@@ -952,6 +950,14 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
     }
 
     const queryParameters: any = {};
+
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
+
+    if (requestParameters.before !== undefined) {
+      queryParameters['before'] = requestParameters.before;
+    }
 
     const headerParameters: runtime.HTTPHeaders = {};
 
@@ -974,7 +980,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  A maximum of 20 results will be returned. This is to reduce performance issues when making requests for uptime checks with a large number of periods.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
    * Get all uptime check periods
    */
   async listUptimeTestPeriods(

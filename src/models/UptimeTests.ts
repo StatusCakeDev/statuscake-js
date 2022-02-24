@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -60,7 +60,7 @@ export interface UptimeTests {
    * @type {Metadata}
    * @memberof UptimeTests
    */
-  metadata?: Metadata;
+  metadata: Metadata;
 }
 
 export function UptimeTestsFromJSON(json: any): UptimeTests {
@@ -76,9 +76,7 @@ export function UptimeTestsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(UptimeTestOverviewFromJSON),
-    metadata: !exists(json, 'metadata')
-      ? undefined
-      : MetadataFromJSON(json['metadata']),
+    metadata: MetadataFromJSON(json['metadata']),
   };
 }
 
