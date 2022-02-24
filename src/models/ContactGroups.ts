@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -36,6 +36,12 @@ import {
   ContactGroupFromJSONTyped,
   ContactGroupToJSON,
 } from './ContactGroup';
+import {
+  Metadata,
+  MetadataFromJSON,
+  MetadataFromJSONTyped,
+  MetadataToJSON,
+} from './Metadata';
 
 /**
  *
@@ -49,6 +55,12 @@ export interface ContactGroups {
    * @memberof ContactGroups
    */
   data: Array<ContactGroup>;
+  /**
+   *
+   * @type {Metadata}
+   * @memberof ContactGroups
+   */
+  metadata: Metadata;
 }
 
 export function ContactGroupsFromJSON(json: any): ContactGroups {
@@ -64,6 +76,7 @@ export function ContactGroupsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(ContactGroupFromJSON),
+    metadata: MetadataFromJSON(json['metadata']),
   };
 }
 
@@ -76,5 +89,6 @@ export function ContactGroupsToJSON(value?: ContactGroups | null): any {
   }
   return {
     data: (value.data as Array<any>).map(ContactGroupToJSON),
+    metadata: MetadataToJSON(value.metadata),
   };
 }

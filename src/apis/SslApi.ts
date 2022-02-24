@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -71,6 +71,11 @@ export interface DeleteSslTestRequest {
 
 export interface GetSslTestRequest {
   testId: string;
+}
+
+export interface ListSslTestsRequest {
+  page?: number;
+  limit?: number;
 }
 
 export interface UpdateSslTestRequest {
@@ -179,11 +184,14 @@ export interface SslApiInterface {
   /**
    * Returns a list of SSL checks for an account.
    * @summary Get all SSL checks
+   * @param {number} [page] Page of results
+   * @param {number} [limit] The number of SSL checks to return per page
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof SslApiInterface
    */
   listSslTestsRaw(
+    requestParameters: ListSslTestsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<SSLTests>>;
 
@@ -191,7 +199,10 @@ export interface SslApiInterface {
    * Returns a list of SSL checks for an account.
    * Get all SSL checks
    */
-  listSslTests(initOverrides?: RequestInit): Promise<SSLTests>;
+  listSslTests(
+    requestParameters: ListSslTestsRequest,
+    initOverrides?: RequestInit,
+  ): Promise<SSLTests>;
 
   /**
    * Updates an SSL check with the given parameters.
@@ -493,9 +504,18 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
    * Get all SSL checks
    */
   async listSslTestsRaw(
+    requestParameters: ListSslTestsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<SSLTests>> {
     const queryParameters: any = {};
+
+    if (requestParameters.page !== undefined) {
+      queryParameters['page'] = requestParameters.page;
+    }
+
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
 
     const headerParameters: runtime.HTTPHeaders = {};
 
@@ -518,8 +538,14 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
    * Returns a list of SSL checks for an account.
    * Get all SSL checks
    */
-  async listSslTests(initOverrides?: RequestInit): Promise<SSLTests> {
-    const response = await this.listSslTestsRaw(initOverrides);
+  async listSslTests(
+    requestParameters: ListSslTestsRequest = {},
+    initOverrides?: RequestInit,
+  ): Promise<SSLTests> {
+    const response = await this.listSslTestsRaw(
+      requestParameters,
+      initOverrides,
+    );
     return await response.value();
   }
 

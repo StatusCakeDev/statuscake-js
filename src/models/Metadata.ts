@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -41,25 +41,25 @@ export interface Metadata {
    * @type {number}
    * @memberof Metadata
    */
-  page?: number;
+  page: number;
   /**
    * The number of results per page
    * @type {number}
    * @memberof Metadata
    */
-  perPage?: number;
+  perPage: number;
   /**
    * The total number of pages
    * @type {number}
    * @memberof Metadata
    */
-  pageCount?: number;
+  pageCount: number;
   /**
    * The total number of results
    * @type {number}
    * @memberof Metadata
    */
-  totalCount?: number;
+  totalCount: number;
 }
 
 export function MetadataFromJSON(json: any): Metadata {
@@ -74,10 +74,10 @@ export function MetadataFromJSONTyped(
     return json;
   }
   return {
-    page: !exists(json, 'page') ? undefined : json['page'],
-    perPage: !exists(json, 'per_page') ? undefined : json['per_page'],
-    pageCount: !exists(json, 'page_count') ? undefined : json['page_count'],
-    totalCount: !exists(json, 'total_count') ? undefined : json['total_count'],
+    page: json['page'],
+    perPage: json['per_page'],
+    pageCount: json['page_count'],
+    totalCount: json['total_count'],
   };
 }
 

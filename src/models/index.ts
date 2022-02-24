@@ -24,7 +24,6 @@ export * from './PagespeedTestHistoryDataAggregatedFilesize';
 export * from './PagespeedTestHistoryDataAggregatedLoadtime';
 export * from './PagespeedTestHistoryDataAggregatedRequests';
 export * from './PagespeedTestHistoryResult';
-export * from './PagespeedTestRegion';
 export * from './PagespeedTestResponse';
 export * from './PagespeedTestStats';
 export * from './PagespeedTestThrottling';

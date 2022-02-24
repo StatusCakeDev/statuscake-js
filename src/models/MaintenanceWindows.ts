@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -36,6 +36,12 @@ import {
   MaintenanceWindowFromJSONTyped,
   MaintenanceWindowToJSON,
 } from './MaintenanceWindow';
+import {
+  Metadata,
+  MetadataFromJSON,
+  MetadataFromJSONTyped,
+  MetadataToJSON,
+} from './Metadata';
 
 /**
  *
@@ -49,6 +55,12 @@ export interface MaintenanceWindows {
    * @memberof MaintenanceWindows
    */
   data: Array<MaintenanceWindow>;
+  /**
+   *
+   * @type {Metadata}
+   * @memberof MaintenanceWindows
+   */
+  metadata: Metadata;
 }
 
 export function MaintenanceWindowsFromJSON(json: any): MaintenanceWindows {
@@ -64,6 +76,7 @@ export function MaintenanceWindowsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(MaintenanceWindowFromJSON),
+    metadata: MetadataFromJSON(json['metadata']),
   };
 }
 
@@ -78,5 +91,6 @@ export function MaintenanceWindowsToJSON(
   }
   return {
     data: (value.data as Array<any>).map(MaintenanceWindowToJSON),
+    metadata: MetadataToJSON(value.metadata),
   };
 }

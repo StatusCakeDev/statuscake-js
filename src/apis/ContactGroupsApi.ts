@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -62,6 +62,11 @@ export interface DeleteContactGroupRequest {
 
 export interface GetContactGroupRequest {
   groupId: string;
+}
+
+export interface ListContactGroupsRequest {
+  page?: number;
+  limit?: number;
 }
 
 export interface UpdateContactGroupRequest {
@@ -159,11 +164,14 @@ export interface ContactGroupsApiInterface {
   /**
    * Returns a list of contact groups for an account.
    * @summary Get all contact groups
+   * @param {number} [page] Page of results
+   * @param {number} [limit] The number of contact groups to return per page
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ContactGroupsApiInterface
    */
   listContactGroupsRaw(
+    requestParameters: ListContactGroupsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<ContactGroups>>;
 
@@ -171,7 +179,10 @@ export interface ContactGroupsApiInterface {
    * Returns a list of contact groups for an account.
    * Get all contact groups
    */
-  listContactGroups(initOverrides?: RequestInit): Promise<ContactGroups>;
+  listContactGroups(
+    requestParameters: ListContactGroupsRequest,
+    initOverrides?: RequestInit,
+  ): Promise<ContactGroups>;
 
   /**
    * Updates a contact group with the given parameters.
@@ -437,9 +448,18 @@ export class ContactGroupsApi extends runtime.BaseAPI
    * Get all contact groups
    */
   async listContactGroupsRaw(
+    requestParameters: ListContactGroupsRequest,
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<ContactGroups>> {
     const queryParameters: any = {};
+
+    if (requestParameters.page !== undefined) {
+      queryParameters['page'] = requestParameters.page;
+    }
+
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
 
     const headerParameters: runtime.HTTPHeaders = {};
 
@@ -462,8 +482,14 @@ export class ContactGroupsApi extends runtime.BaseAPI
    * Returns a list of contact groups for an account.
    * Get all contact groups
    */
-  async listContactGroups(initOverrides?: RequestInit): Promise<ContactGroups> {
-    const response = await this.listContactGroupsRaw(initOverrides);
+  async listContactGroups(
+    requestParameters: ListContactGroupsRequest = {},
+    initOverrides?: RequestInit,
+  ): Promise<ContactGroups> {
+    const response = await this.listContactGroupsRaw(
+      requestParameters,
+      initOverrides,
+    );
     return await response.value();
   }
 
