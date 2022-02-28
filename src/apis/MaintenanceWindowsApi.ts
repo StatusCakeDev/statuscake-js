@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.1
+ * API version: 1.0.0-beta.2
  * Contact: support@statuscake.com
  */
 
@@ -69,6 +69,8 @@ export interface GetMaintenanceWindowRequest {
 }
 
 export interface ListMaintenanceWindowsRequest {
+  page?: number;
+  limit?: number;
   state?: ListMaintenanceWindowsStateEnum;
 }
 
@@ -169,6 +171,8 @@ export interface MaintenanceWindowsApiInterface {
   /**
    * Returns a list of maintenance windows for an account.
    * @summary Get all maintenance windows
+   * @param {number} [page] Page of results
+   * @param {number} [limit] The number of maintenance windows to return per page
    * @param {'active' | 'paused' | 'pending'} [state] Maintenance window state
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -489,6 +493,14 @@ export class MaintenanceWindowsApi extends runtime.BaseAPI
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<MaintenanceWindows>> {
     const queryParameters: any = {};
+
+    if (requestParameters.page !== undefined) {
+      queryParameters['page'] = requestParameters.page;
+    }
+
+    if (requestParameters.limit !== undefined) {
+      queryParameters['limit'] = requestParameters.limit;
+    }
 
     if (requestParameters.state !== undefined) {
       queryParameters['state'] = requestParameters.state;

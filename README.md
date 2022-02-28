@@ -16,13 +16,18 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-With [NPM](https://www.npmjs.com/), simply run the following command:
+With [NPM](https://www.npmjs.com/), run the following command
 
 ```bash
 npm install --save "@statuscake/statuscake-js"
 ```
 
-and import the client from your code:
+to add the package to your `package.json` file.
+
+## Usage
+
+Import the package from any JavaScript/TypeScript file, instantiate an API
+client and execute a request:
 
 ```javascript
 import 'isomorphic-fetch';
@@ -35,6 +40,17 @@ import {
   SslApi,
   UptimeApi,
 } from '@statuscake/statuscake-js';
+
+const config = new Configuration({
+  headers: {
+    'Authorization': `Bearer ${apiToken}`,
+  },
+});
+
+const service = new UptimeApi(config);
+service.listUptimeTests()
+  .then((tests) => console.log(JSON.stringify(tests)))
+  .catch(console.log);
 ```
 
 ## License
