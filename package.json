@@ -29,8 +29,5 @@
   },
   "peerDependencies": {
     "isomorphic-fetch": "^3.0.0"
-  },
-  "publishConfig": {
-    "registry": "https://github.com/StatusCakeDev/statuscake-js"
   }
 }
