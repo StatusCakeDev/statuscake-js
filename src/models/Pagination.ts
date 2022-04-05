@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -31,54 +31,57 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Aggregate request count
+ *
  * @export
- * @interface PagespeedTestHistoryDataAggregatedRequests
+ * @interface Pagination
  */
-export interface PagespeedTestHistoryDataAggregatedRequests {
+export interface Pagination {
   /**
-   * Minimum number of requests across all checks
+   * The current page of results
    * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedRequests
+   * @memberof Pagination
    */
-  min: number;
+  page: number;
   /**
-   * Maximum number of requests across all checks
+   * The number of results per page
    * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedRequests
+   * @memberof Pagination
    */
-  max: number;
+  perPage: number;
   /**
-   * Average number of requests acress all checks
+   * The total number of pages
    * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedRequests
+   * @memberof Pagination
    */
-  avg: number;
+  pageCount: number;
+  /**
+   * The total number of results
+   * @type {number}
+   * @memberof Pagination
+   */
+  totalCount: number;
 }
 
-export function PagespeedTestHistoryDataAggregatedRequestsFromJSON(
-  json: any,
-): PagespeedTestHistoryDataAggregatedRequests {
-  return PagespeedTestHistoryDataAggregatedRequestsFromJSONTyped(json, false);
+export function PaginationFromJSON(json: any): Pagination {
+  return PaginationFromJSONTyped(json, false);
 }
 
-export function PagespeedTestHistoryDataAggregatedRequestsFromJSONTyped(
+export function PaginationFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): PagespeedTestHistoryDataAggregatedRequests {
+): Pagination {
   if (json === undefined || json === null) {
     return json;
   }
   return {
-    min: json['min'],
-    max: json['max'],
-    avg: json['avg'],
+    page: json['page'],
+    perPage: json['per_page'],
+    pageCount: json['page_count'],
+    totalCount: json['total_count'],
   };
 }
 
-export function PagespeedTestHistoryDataAggregatedRequestsToJSON(
-  value?: PagespeedTestHistoryDataAggregatedRequests | null,
-): any {
+export function PaginationToJSON(value?: Pagination | null): any {
   if (value === undefined) {
     return undefined;
   }
@@ -86,8 +89,9 @@ export function PagespeedTestHistoryDataAggregatedRequestsToJSON(
     return null;
   }
   return {
-    min: value.min,
-    max: value.max,
-    avg: value.avg,
+    page: value.page,
+    per_page: value.perPage,
+    page_count: value.pageCount,
+    total_count: value.totalCount,
   };
 }

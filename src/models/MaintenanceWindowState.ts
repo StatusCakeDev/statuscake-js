@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,9 +35,9 @@
  * @enum {string}
  */
 export enum MaintenanceWindowState {
-  MaintenanceWindowStateActive = 'active',
-  MaintenanceWindowStatePaused = 'paused',
-  MaintenanceWindowStatePending = 'pending',
+  Active = 'active',
+  Paused = 'paused',
+  Pending = 'pending',
 }
 
 export function MaintenanceWindowStateFromJSON(

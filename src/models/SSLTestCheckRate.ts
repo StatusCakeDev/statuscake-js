@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,12 +35,12 @@
  * @enum {string}
  */
 export enum SSLTestCheckRate {
-  SSLTestCheckRateFiveMinutes = 300,
-  SSLTestCheckRateTenMinutes = 600,
-  SSLTestCheckRateThirtyMinutes = 1800,
-  SSLTestCheckRateOneHour = 3600,
-  SSLTestCheckRateOneDay = 86400,
-  SSLTestCheckRateOneWeek = 2073600,
+  FiveMinutes = 300,
+  TenMinutes = 600,
+  ThirtyMinutes = 1800,
+  OneHour = 3600,
+  OneDay = 86400,
+  OneWeek = 2073600,
 }
 
 export function SSLTestCheckRateFromJSON(json: any): SSLTestCheckRate {

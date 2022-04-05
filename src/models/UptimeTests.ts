@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -31,11 +31,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-  Metadata,
-  MetadataFromJSON,
-  MetadataFromJSONTyped,
-  MetadataToJSON,
-} from './Metadata';
+  Pagination,
+  PaginationFromJSON,
+  PaginationFromJSONTyped,
+  PaginationToJSON,
+} from './Pagination';
 import {
   UptimeTestOverview,
   UptimeTestOverviewFromJSON,
@@ -57,10 +57,10 @@ export interface UptimeTests {
   data: Array<UptimeTestOverview>;
   /**
    *
-   * @type {Metadata}
+   * @type {Pagination}
    * @memberof UptimeTests
    */
-  metadata: Metadata;
+  metadata: Pagination;
 }
 
 export function UptimeTestsFromJSON(json: any): UptimeTests {
@@ -76,7 +76,7 @@ export function UptimeTestsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(UptimeTestOverviewFromJSON),
-    metadata: MetadataFromJSON(json['metadata']),
+    metadata: PaginationFromJSON(json['metadata']),
   };
 }
 
@@ -89,6 +89,6 @@ export function UptimeTestsToJSON(value?: UptimeTests | null): any {
   }
   return {
     data: (value.data as Array<any>).map(UptimeTestOverviewToJSON),
-    metadata: MetadataToJSON(value.metadata),
+    metadata: PaginationToJSON(value.metadata),
   };
 }

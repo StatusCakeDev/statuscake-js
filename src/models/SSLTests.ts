@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -31,11 +31,11 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-  Metadata,
-  MetadataFromJSON,
-  MetadataFromJSONTyped,
-  MetadataToJSON,
-} from './Metadata';
+  Pagination,
+  PaginationFromJSON,
+  PaginationFromJSONTyped,
+  PaginationToJSON,
+} from './Pagination';
 import {
   SSLTest,
   SSLTestFromJSON,
@@ -57,10 +57,10 @@ export interface SSLTests {
   data: Array<SSLTest>;
   /**
    *
-   * @type {Metadata}
+   * @type {Pagination}
    * @memberof SSLTests
    */
-  metadata: Metadata;
+  metadata: Pagination;
 }
 
 export function SSLTestsFromJSON(json: any): SSLTests {
@@ -76,7 +76,7 @@ export function SSLTestsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(SSLTestFromJSON),
-    metadata: MetadataFromJSON(json['metadata']),
+    metadata: PaginationFromJSON(json['metadata']),
   };
 }
 
@@ -89,6 +89,6 @@ export function SSLTestsToJSON(value?: SSLTests | null): any {
   }
   return {
     data: (value.data as Array<any>).map(SSLTestToJSON),
-    metadata: MetadataToJSON(value.metadata),
+    metadata: PaginationToJSON(value.metadata),
   };
 }

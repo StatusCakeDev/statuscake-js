@@ -1,16 +1,16 @@
 {
   "name": "@statuscake/statuscake-js",
-  "version": "1.0.0-beta.2",
-  "description": "SDK client for @statuscake/statuscake-js",
+  "version": "1.0.0-beta.3",
+  "description": "StatusCake API client",
   "keywords": [
     "sdk",
     "statuscake",
     "javascript"
   ],
   "repository": "https://github.com/StatusCakeDev/statuscake-js",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "author": {
-    "name": "Support",
+    "name": "StatusCake",
     "email": "support@statuscake.com",
     "url": "https://www.statuscake.com"
   },

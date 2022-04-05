@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,13 +35,13 @@
  * @enum {string}
  */
 export enum UptimeTestType {
-  UptimeTestTypeDns = 'DNS',
-  UptimeTestTypeHead = 'HEAD',
-  UptimeTestTypeHttp = 'HTTP',
-  UptimeTestTypePing = 'PING',
-  UptimeTestTypeSmtp = 'SMTP',
-  UptimeTestTypeSsh = 'SSH',
-  UptimeTestTypeTcp = 'TCP',
+  Dns = 'DNS',
+  Head = 'HEAD',
+  Http = 'HTTP',
+  Ping = 'PING',
+  Smtp = 'SMTP',
+  Ssh = 'SSH',
+  Tcp = 'TCP',
 }
 
 export function UptimeTestTypeFromJSON(json: any): UptimeTestType {
