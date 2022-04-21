@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,14 +35,14 @@
  * @enum {string}
  */
 export enum UptimeTestCheckRate {
-  UptimeTestCheckRateConstant = 0,
-  UptimeTestCheckRateThirtySeconds = 30,
-  UptimeTestCheckRateOneMinute = 60,
-  UptimeTestCheckRateFiveMinutes = 300,
-  UptimeTestCheckRateFifteenMinutes = 900,
-  UptimeTestCheckRateThirtyMinutes = 1800,
-  UptimeTestCheckRateOneHour = 3600,
-  UptimeTestCheckRateOneDay = 86400,
+  Constant = 0,
+  ThirtySeconds = 30,
+  OneMinute = 60,
+  FiveMinutes = 300,
+  FifteenMinutes = 900,
+  ThirtyMinutes = 1800,
+  OneHour = 3600,
+  OneDay = 86400,
 }
 
 export function UptimeTestCheckRateFromJSON(json: any): UptimeTestCheckRate {

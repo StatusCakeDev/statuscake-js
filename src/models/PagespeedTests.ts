@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -31,17 +31,17 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-  Metadata,
-  MetadataFromJSON,
-  MetadataFromJSONTyped,
-  MetadataToJSON,
-} from './Metadata';
-import {
   PagespeedTest,
   PagespeedTestFromJSON,
   PagespeedTestFromJSONTyped,
   PagespeedTestToJSON,
 } from './PagespeedTest';
+import {
+  Pagination,
+  PaginationFromJSON,
+  PaginationFromJSONTyped,
+  PaginationToJSON,
+} from './Pagination';
 
 /**
  *
@@ -57,10 +57,10 @@ export interface PagespeedTests {
   data: Array<PagespeedTest>;
   /**
    *
-   * @type {Metadata}
+   * @type {Pagination}
    * @memberof PagespeedTests
    */
-  metadata: Metadata;
+  metadata: Pagination;
 }
 
 export function PagespeedTestsFromJSON(json: any): PagespeedTests {
@@ -76,7 +76,7 @@ export function PagespeedTestsFromJSONTyped(
   }
   return {
     data: (json['data'] as Array<any>).map(PagespeedTestFromJSON),
-    metadata: MetadataFromJSON(json['metadata']),
+    metadata: PaginationFromJSON(json['metadata']),
   };
 }
 
@@ -89,6 +89,6 @@ export function PagespeedTestsToJSON(value?: PagespeedTests | null): any {
   }
   return {
     data: (value.data as Array<any>).map(PagespeedTestToJSON),
-    metadata: MetadataToJSON(value.metadata),
+    metadata: PaginationToJSON(value.metadata),
   };
 }

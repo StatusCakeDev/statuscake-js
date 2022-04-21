@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -182,7 +182,7 @@ export interface PagespeedApiInterface {
   ): Promise<PagespeedTestResponse>;
 
   /**
-   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.  Aggregated data over the specified duration is returned in the root level `metadata` field.
    * @summary Get all pagespeed check history
    * @param {string} testId Pagespeed check ID
    * @param {number} [limit] The number of results to return from the series
@@ -197,7 +197,7 @@ export interface PagespeedApiInterface {
   ): Promise<runtime.ApiResponse<PagespeedTestHistory>>;
 
   /**
-   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.  Aggregated data over the specified duration is returned in the root level `metadata` field.
    * Get all pagespeed check history
    */
   listPagespeedTestHistory(
@@ -529,7 +529,7 @@ export class PagespeedApi extends runtime.BaseAPI
   }
 
   /**
-   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.  Aggregated data over the specified duration is returned in the root level `metadata` field.
    * Get all pagespeed check history
    */
   async listPagespeedTestHistoryRaw(
@@ -577,7 +577,7 @@ export class PagespeedApi extends runtime.BaseAPI
   }
 
   /**
-   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of pagespeed check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.  Aggregated data over the specified duration is returned in the root level `metadata` field.
    * Get all pagespeed check history
    */
   async listPagespeedTestHistory(

@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,12 +35,12 @@
  * @enum {string}
  */
 export enum PagespeedTestThrottling {
-  PagespeedTestThrottlingNone = 'NONE',
-  PagespeedTestThrottlingFast3G = '3G_FAST',
-  PagespeedTestThrottlingSlow3G = '3G_SLOW',
-  PagespeedTestThrottling4G = '4G',
-  PagespeedTestThrottlingEDGE = 'EDGE',
-  PagespeedTestThrottlingGPRS = 'GPRS',
+  None = 'NONE',
+  Fast3G = '3G_FAST',
+  Slow3G = '3G_SLOW',
+  _4G = '4G',
+  EDGE = 'EDGE',
+  GPRS = 'GPRS',
 }
 
 export function PagespeedTestThrottlingFromJSON(

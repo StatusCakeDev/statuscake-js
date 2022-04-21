@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,13 +35,13 @@
  * @enum {string}
  */
 export enum PagespeedTestCheckRate {
-  PagespeedTestCheckRateOneMinute = 60,
-  PagespeedTestCheckRateFiveMinutes = 300,
-  PagespeedTestCheckRateTenMinutes = 600,
-  PagespeedTestCheckRateFifteenMinutes = 900,
-  PagespeedTestCheckRateThirtyMinutes = 1800,
-  PagespeedTestCheckRateOneHour = 3600,
-  PagespeedTestCheckRateOneDay = 86400,
+  OneMinute = 60,
+  FiveMinutes = 300,
+  TenMinutes = 600,
+  FifteenMinutes = 900,
+  ThirtyMinutes = 1800,
+  OneHour = 3600,
+  OneDay = 86400,
 }
 
 export function PagespeedTestCheckRateFromJSON(

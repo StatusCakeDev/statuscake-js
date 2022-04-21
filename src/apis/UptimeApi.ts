@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -269,7 +269,7 @@ export interface UptimeApiInterface {
   ): Promise<UptimeTestResponse>;
 
   /**
-   * Returns a list of uptime check alerts for a given id.
+   * Returns a list of uptime check alerts for a given id.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * @summary Get all uptime check alerts
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of uptime alerts to return per page
@@ -284,7 +284,7 @@ export interface UptimeApiInterface {
   ): Promise<runtime.ApiResponse<UptimeTestAlerts>>;
 
   /**
-   * Returns a list of uptime check alerts for a given id.
+   * Returns a list of uptime check alerts for a given id.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check alerts
    */
   listUptimeTestAlerts(
@@ -293,7 +293,7 @@ export interface UptimeApiInterface {
   ): Promise<UptimeTestAlerts>;
 
   /**
-   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * @summary Get all uptime check history
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of results to return per page
@@ -308,7 +308,7 @@ export interface UptimeApiInterface {
   ): Promise<runtime.ApiResponse<UptimeTestHistory>>;
 
   /**
-   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check history
    */
   listUptimeTestHistory(
@@ -317,7 +317,7 @@ export interface UptimeApiInterface {
   ): Promise<UptimeTestHistory>;
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * @summary Get all uptime check periods
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of uptime check periods to return per page
@@ -332,7 +332,7 @@ export interface UptimeApiInterface {
   ): Promise<runtime.ApiResponse<UptimeTestPeriods>>;
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check periods
    */
   listUptimeTestPeriods(
@@ -806,7 +806,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check alerts for a given id.
+   * Returns a list of uptime check alerts for a given id.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check alerts
    */
   async listUptimeTestAlertsRaw(
@@ -854,7 +854,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check alerts for a given id.
+   * Returns a list of uptime check alerts for a given id.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check alerts
    */
   async listUptimeTestAlerts(
@@ -869,7 +869,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check history
    */
   async listUptimeTestHistoryRaw(
@@ -917,7 +917,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.
+   * Returns a list of uptime check history results for a given id, detailing the runs performed on the StatusCake testing infrastruture.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check history
    */
   async listUptimeTestHistory(
@@ -932,7 +932,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check periods
    */
   async listUptimeTestPeriodsRaw(
@@ -980,7 +980,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.
+   * Returns a list of uptime check periods for a given id, detailing the creation time of the period, when it ended and the duration.  The returned results are a paginated series. Alongside the response data is a `links` object referencing the current response document, `self`, and the next page in the series, `next`.
    * Get all uptime check periods
    */
   async listUptimeTestPeriods(

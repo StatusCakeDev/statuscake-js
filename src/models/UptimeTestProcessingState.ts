@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,10 +35,10 @@
  * @enum {string}
  */
 export enum UptimeTestProcessingState {
-  UptimeTestProcessingStateComplete = 'complete',
-  UptimeTestProcessingStatePretest = 'pretest',
-  UptimeTestProcessingStateRetest = 'retest',
-  UptimeTestProcessingStateUpRetest = 'up_retest',
+  Complete = 'complete',
+  Pretest = 'pretest',
+  Retest = 'retest',
+  UpRetest = 'up_retest',
 }
 
 export function UptimeTestProcessingStateFromJSON(

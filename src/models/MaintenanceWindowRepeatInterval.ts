@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,11 +35,11 @@
  * @enum {string}
  */
 export enum MaintenanceWindowRepeatInterval {
-  MaintenanceWindowRepeatIntervalNever = 'never',
-  MaintenanceWindowRepeatIntervalDaily = '1d',
-  MaintenanceWindowRepeatIntervalWeekly = '1w',
-  MaintenanceWindowRepeatIntervalBiweekly = '2w',
-  MaintenanceWindowRepeatIntervalMonthly = '1m',
+  Never = 'never',
+  Daily = '1d',
+  Weekly = '1w',
+  Biweekly = '2w',
+  Monthly = '1m',
 }
 
 export function MaintenanceWindowRepeatIntervalFromJSON(

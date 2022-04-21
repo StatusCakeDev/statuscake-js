@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -35,8 +35,8 @@
  * @enum {string}
  */
 export enum MonitoringLocationStatus {
-  MonitoringLocationStatusDown = 'down',
-  MonitoringLocationStatusUp = 'up',
+  Down = 'down',
+  Up = 'up',
 }
 
 export function MonitoringLocationStatusFromJSON(

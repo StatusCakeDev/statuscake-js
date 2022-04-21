@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.2
+ * API version: 1.0.0-beta.3
  * Contact: support@statuscake.com
  */
 
@@ -31,54 +31,38 @@
 
 import { exists, mapValues } from '../runtime';
 /**
- * Aggregate loadtime (ms)
+ *
  * @export
- * @interface PagespeedTestHistoryDataAggregatedLoadtime
+ * @interface Links
  */
-export interface PagespeedTestHistoryDataAggregatedLoadtime {
+export interface Links {
+  [key: string]: object | any;
   /**
-   * Minimum loadtime across all checks
-   * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedLoadtime
+   * The URL that created the current response document
+   * @type {string}
+   * @memberof Links
    */
-  min: number;
-  /**
-   * Maximum loadtime across all checks
-   * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedLoadtime
-   */
-  max: number;
-  /**
-   * Average loadtime acress all checks
-   * @type {number}
-   * @memberof PagespeedTestHistoryDataAggregatedLoadtime
-   */
-  avg: number;
+  self: string;
 }
 
-export function PagespeedTestHistoryDataAggregatedLoadtimeFromJSON(
-  json: any,
-): PagespeedTestHistoryDataAggregatedLoadtime {
-  return PagespeedTestHistoryDataAggregatedLoadtimeFromJSONTyped(json, false);
+export function LinksFromJSON(json: any): Links {
+  return LinksFromJSONTyped(json, false);
 }
 
-export function PagespeedTestHistoryDataAggregatedLoadtimeFromJSONTyped(
+export function LinksFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): PagespeedTestHistoryDataAggregatedLoadtime {
+): Links {
   if (json === undefined || json === null) {
     return json;
   }
   return {
-    min: json['min'],
-    max: json['max'],
-    avg: json['avg'],
+    ...json,
+    self: json['self'],
   };
 }
 
-export function PagespeedTestHistoryDataAggregatedLoadtimeToJSON(
-  value?: PagespeedTestHistoryDataAggregatedLoadtime | null,
-): any {
+export function LinksToJSON(value?: Links | null): any {
   if (value === undefined) {
     return undefined;
   }
@@ -86,8 +70,7 @@ export function PagespeedTestHistoryDataAggregatedLoadtimeToJSON(
     return null;
   }
   return {
-    min: value.min,
-    max: value.max,
-    avg: value.avg,
+    ...value,
+    self: value.self,
   };
 }
