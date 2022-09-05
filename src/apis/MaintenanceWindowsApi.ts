@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -55,9 +55,7 @@ export interface CreateMaintenanceWindowRequest {
   timezone: string;
   repeatInterval?: MaintenanceWindowRepeatInterval;
   tags?: Array<string>;
-  tagsCsv?: string;
   tests?: Array<string>;
-  testsCsv?: string;
 }
 
 export interface DeleteMaintenanceWindowRequest {
@@ -81,9 +79,7 @@ export interface UpdateMaintenanceWindowRequest {
   repeatInterval?: MaintenanceWindowRepeatInterval;
   startAt?: Date;
   tags?: Array<string>;
-  tagsCsv?: string;
   tests?: Array<string>;
-  testsCsv?: string;
   timezone?: string;
 }
 
@@ -103,9 +99,7 @@ export interface MaintenanceWindowsApiInterface {
    * @param {string} timezone Standard [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) associated with this maintenance window
    * @param {MaintenanceWindowRepeatInterval} [repeatInterval]
    * @param {Array<string>} [tags] List of tags used to include matching uptime checks in this maintenance window. At least one of &#x60;tests&#x60; and &#x60;tags&#x60; must be present in the request
-   * @param {string} [tagsCsv] Comma separated list of tags used to include matching uptime checks in this maintenance window. At least one of &#x60;tests_csv&#x60; and &#x60;tags_csv&#x60; must be present in the request
    * @param {Array<string>} [tests] List of uptime check IDs explicitly included in this maintenance window. At least one of &#x60;tests&#x60; and &#x60;tags&#x60; must be present in the request
-   * @param {string} [testsCsv] Comma separated list of uptime check IDs explicitly included in this maintenance window. At least one of &#x60;tests_csv&#x60; and &#x60;tags_csv&#x60; must be present in the request
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof MaintenanceWindowsApiInterface
@@ -201,9 +195,7 @@ export interface MaintenanceWindowsApiInterface {
    * @param {MaintenanceWindowRepeatInterval} [repeatInterval]
    * @param {Date} [startAt] Start of the maintenance window (RFC3339 format)
    * @param {Array<string>} [tags] List of tags used to include matching uptime checks in this maintenance window
-   * @param {string} [tagsCsv] Comma separated list of tags used to include matching uptime checks in this maintenance window
    * @param {Array<string>} [tests] List of uptime check IDs explicitly included in this maintenance window
-   * @param {string} [testsCsv] Comma separated list of uptime check IDs explicitly included in this maintenance window
    * @param {string} [timezone] Standard [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) associated with this maintenance window
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -227,8 +219,10 @@ export interface MaintenanceWindowsApiInterface {
 /**
  *
  */
-export class MaintenanceWindowsApi extends runtime.BaseAPI
-  implements MaintenanceWindowsApiInterface {
+export class MaintenanceWindowsApi
+  extends runtime.BaseAPI
+  implements MaintenanceWindowsApiInterface
+{
   /**
    * Creates a maintenance window with the given parameters.
    * Create a maintenance window
@@ -330,19 +324,11 @@ export class MaintenanceWindowsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.tagsCsv !== undefined) {
-      formParams.append('tags_csv', requestParameters.tagsCsv as any);
-    }
-
     if (requestParameters.tests) {
       formParams.append(
         'tests',
         requestParameters.tests.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.testsCsv !== undefined) {
-      formParams.append('tests_csv', requestParameters.testsCsv as any);
     }
 
     if (requestParameters.timezone !== undefined) {
@@ -609,19 +595,11 @@ export class MaintenanceWindowsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.tagsCsv !== undefined) {
-      formParams.append('tags_csv', requestParameters.tagsCsv as any);
-    }
-
     if (requestParameters.tests) {
       formParams.append(
         'tests',
         requestParameters.tests.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.testsCsv !== undefined) {
-      formParams.append('tests_csv', requestParameters.testsCsv as any);
     }
 
     if (requestParameters.timezone !== undefined) {

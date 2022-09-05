@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -86,7 +86,7 @@ export interface UptimeTest {
    */
   testType: UptimeTestType;
   /**
-   * URL or IP address of the server under test
+   * URL, FQDN, or IP address of the server under test
    * @type {string}
    * @memberof UptimeTest
    */
@@ -123,7 +123,7 @@ export interface UptimeTest {
    */
   dnsIps: Array<string>;
   /**
-   * Hostname or IP address of the nameserver to query
+   * FQDN or IP address of the nameserver to query
    * @type {string}
    * @memberof UptimeTest
    */
