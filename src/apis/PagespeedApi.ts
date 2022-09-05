@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -63,7 +63,6 @@ export interface CreatePagespeedTestRequest {
   alertSlower?: number;
   alertSmaller?: number;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   paused?: boolean;
 }
 
@@ -94,7 +93,6 @@ export interface UpdatePagespeedTestRequest {
   alertSlower?: number;
   alertSmaller?: number;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   paused?: boolean;
   region?: PagespeedTestRegion;
 }
@@ -110,14 +108,13 @@ export interface PagespeedApiInterface {
    * Creates a pagespeed check with the given parameters.
    * @summary Create a pagespeed check
    * @param {string} name Name of the check
-   * @param {string} websiteUrl URL or IP address of the website under test
+   * @param {string} websiteUrl URL, FQDN, or IP address of the website under test
    * @param {PagespeedTestCheckRate} checkRate
    * @param {PagespeedTestRegion} region
    * @param {number} [alertBigger] An alert will be sent if the size of the page is larger than this value (kb). A value of 0 prevents alerts being sent.
    * @param {number} [alertSlower] An alert will be sent if the load time of the page exceeds this value (ms). A value of 0 prevents alerts being sent
    * @param {number} [alertSmaller] An alert will be sent if the size of the page is smaller than this value (kb). A value of 0 prevents alerts being sent
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {boolean} [paused] Whether the check should be run
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -238,7 +235,6 @@ export interface PagespeedApiInterface {
    * @param {number} [alertSlower] An alert will be sent if the load time of the page exceeds this value (ms). A value of 0 prevents alerts being sent
    * @param {number} [alertSmaller] An alert will be sent if the size of the page is smaller than this value (kb). A value of 0 prevents alerts being sent
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {boolean} [paused] Whether the check should be run
    * @param {PagespeedTestRegion} [region]
    * @param {*} [options] Override http request option.
@@ -263,8 +259,10 @@ export interface PagespeedApiInterface {
 /**
  *
  */
-export class PagespeedApi extends runtime.BaseAPI
-  implements PagespeedApiInterface {
+export class PagespeedApi
+  extends runtime.BaseAPI
+  implements PagespeedApiInterface
+{
   /**
    * Creates a pagespeed check with the given parameters.
    * Create a pagespeed check
@@ -369,13 +367,6 @@ export class PagespeedApi extends runtime.BaseAPI
       formParams.append(
         'contact_groups',
         requestParameters.contactGroups.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
       );
     }
 
@@ -711,13 +702,6 @@ export class PagespeedApi extends runtime.BaseAPI
       formParams.append(
         'contact_groups',
         requestParameters.contactGroups.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
       );
     }
 

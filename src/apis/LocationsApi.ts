@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -40,13 +40,12 @@ import {
 } from '../models';
 
 export interface ListPagespeedMonitoringLocationsRequest {
-  best?: boolean;
   location?: string;
 }
 
 export interface ListUptimeMonitoringLocationsRequest {
-  best?: boolean;
   location?: string;
+  regionCode?: string;
 }
 
 /**
@@ -59,7 +58,6 @@ export interface LocationsApiInterface {
   /**
    * Returns a list of locations detailing server information for pagespeed monitoring servers. This information can be used to create further checks using the API.
    * @summary Get all pagespeed monitoring locations
-   * @param {boolean} [best] Return only locations with the least number of checks
    * @param {string} [location] Alpha-2 ISO 3166-1 country code
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -82,8 +80,8 @@ export interface LocationsApiInterface {
   /**
    * Returns a list of locations detailing server information for uptime monitoring servers. This information can be used to create further checks using the API.
    * @summary Get all uptime monitoring locations
-   * @param {boolean} [best] Return only locations with the least number of checks
    * @param {string} [location] Alpha-3 ISO 3166-1 country code
+   * @param {string} [regionCode] Server region code
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof LocationsApiInterface
@@ -106,8 +104,10 @@ export interface LocationsApiInterface {
 /**
  *
  */
-export class LocationsApi extends runtime.BaseAPI
-  implements LocationsApiInterface {
+export class LocationsApi
+  extends runtime.BaseAPI
+  implements LocationsApiInterface
+{
   /**
    * Returns a list of locations detailing server information for pagespeed monitoring servers. This information can be used to create further checks using the API.
    * Get all pagespeed monitoring locations
@@ -117,10 +117,6 @@ export class LocationsApi extends runtime.BaseAPI
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<MonitoringLocations>> {
     const queryParameters: any = {};
-
-    if (requestParameters.best !== undefined) {
-      queryParameters['best'] = requestParameters.best;
-    }
 
     if (requestParameters.location !== undefined) {
       queryParameters['location'] = requestParameters.location;
@@ -168,12 +164,12 @@ export class LocationsApi extends runtime.BaseAPI
   ): Promise<runtime.ApiResponse<MonitoringLocations>> {
     const queryParameters: any = {};
 
-    if (requestParameters.best !== undefined) {
-      queryParameters['best'] = requestParameters.best;
-    }
-
     if (requestParameters.location !== undefined) {
       queryParameters['location'] = requestParameters.location;
+    }
+
+    if (requestParameters.regionCode !== undefined) {
+      queryParameters['region_code'] = requestParameters.regionCode;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};

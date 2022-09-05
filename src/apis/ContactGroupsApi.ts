@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -48,11 +48,8 @@ import {
 export interface CreateContactGroupRequest {
   name: string;
   emailAddresses?: Array<string>;
-  emailAddressesCsv?: string;
   integrations?: Array<string>;
-  integrationsCsv?: string;
   mobileNumbers?: Array<string>;
-  mobileNumbersCsv?: string;
   pingUrl?: string;
 }
 
@@ -73,11 +70,8 @@ export interface UpdateContactGroupRequest {
   groupId: string;
   name?: string;
   emailAddresses?: Array<string>;
-  emailAddressesCsv?: string;
   integrations?: Array<string>;
-  integrationsCsv?: string;
   mobileNumbers?: Array<string>;
-  mobileNumbersCsv?: string;
   pingUrl?: string;
 }
 
@@ -93,11 +87,8 @@ export interface ContactGroupsApiInterface {
    * @summary Create a contact group
    * @param {string} name Name of the contact group
    * @param {Array<string>} [emailAddresses] List of email addresses
-   * @param {string} [emailAddressesCsv] Comma separated list of email addresses
    * @param {Array<string>} [integrations] List of integration IDs
-   * @param {string} [integrationsCsv] Comma separated list of integration IDs
    * @param {Array<string>} [mobileNumbers] List of international format mobile phone numbers
-   * @param {string} [mobileNumbersCsv] Comma separated list of international format mobile phone numbers
    * @param {string} [pingUrl] URL or IP address of an endpoint to push uptime events. Currently this only supports HTTP GET endpoints
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -190,11 +181,8 @@ export interface ContactGroupsApiInterface {
    * @param {string} groupId Contact group ID
    * @param {string} [name] Name of the contact group
    * @param {Array<string>} [emailAddresses] List of email addresses
-   * @param {string} [emailAddressesCsv] Comma separated list of email addresses
    * @param {Array<string>} [integrations] List of integration IDs
-   * @param {string} [integrationsCsv] Comma separated list of integration IDs
    * @param {Array<string>} [mobileNumbers] List of international format mobile phone numbers
-   * @param {string} [mobileNumbersCsv] Comma separated list of international format mobile phone numbers
    * @param {string} [pingUrl] URL or IP address of an endpoint to push uptime events. Currently this only supports HTTP GET endpoints
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -218,8 +206,10 @@ export interface ContactGroupsApiInterface {
 /**
  *
  */
-export class ContactGroupsApi extends runtime.BaseAPI
-  implements ContactGroupsApiInterface {
+export class ContactGroupsApi
+  extends runtime.BaseAPI
+  implements ContactGroupsApiInterface
+{
   /**
    * Creates a contact group with the given parameters.
    * Create a contact group
@@ -269,13 +259,6 @@ export class ContactGroupsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.emailAddressesCsv !== undefined) {
-      formParams.append(
-        'email_addresses_csv',
-        requestParameters.emailAddressesCsv as any,
-      );
-    }
-
     if (requestParameters.integrations) {
       formParams.append(
         'integrations',
@@ -283,24 +266,10 @@ export class ContactGroupsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.integrationsCsv !== undefined) {
-      formParams.append(
-        'integrations_csv',
-        requestParameters.integrationsCsv as any,
-      );
-    }
-
     if (requestParameters.mobileNumbers) {
       formParams.append(
         'mobile_numbers',
         requestParameters.mobileNumbers.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.mobileNumbersCsv !== undefined) {
-      formParams.append(
-        'mobile_numbers_csv',
-        requestParameters.mobileNumbersCsv as any,
       );
     }
 
@@ -542,13 +511,6 @@ export class ContactGroupsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.emailAddressesCsv !== undefined) {
-      formParams.append(
-        'email_addresses_csv',
-        requestParameters.emailAddressesCsv as any,
-      );
-    }
-
     if (requestParameters.integrations) {
       formParams.append(
         'integrations',
@@ -556,24 +518,10 @@ export class ContactGroupsApi extends runtime.BaseAPI
       );
     }
 
-    if (requestParameters.integrationsCsv !== undefined) {
-      formParams.append(
-        'integrations_csv',
-        requestParameters.integrationsCsv as any,
-      );
-    }
-
     if (requestParameters.mobileNumbers) {
       formParams.append(
         'mobile_numbers',
         requestParameters.mobileNumbers.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.mobileNumbersCsv !== undefined) {
-      formParams.append(
-        'mobile_numbers_csv',
-        requestParameters.mobileNumbersCsv as any,
       );
     }
 

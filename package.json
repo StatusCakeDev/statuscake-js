@@ -1,6 +1,6 @@
 {
   "name": "@statuscake/statuscake-js",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "description": "StatusCake API client",
   "keywords": [
     "sdk",
