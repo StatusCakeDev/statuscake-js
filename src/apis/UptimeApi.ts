@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -69,11 +69,9 @@ export interface CreateUptimeTestRequest {
   basicPassword?: string;
   confirmation?: number;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   customHeader?: string;
   doNotFind?: boolean;
   dnsIps?: Array<string>;
-  dnsIpsCsv?: string;
   dnsServer?: string;
   enableSslAlert?: boolean;
   finalEndpoint?: string;
@@ -88,7 +86,6 @@ export interface CreateUptimeTestRequest {
   regions?: Array<string>;
   statusCodesCsv?: string;
   tags?: Array<string>;
-  tagsCsv?: string;
   timeout?: number;
   triggerRate?: number;
   useJar?: boolean;
@@ -138,11 +135,9 @@ export interface UpdateUptimeTestRequest {
   basicPassword?: string;
   confirmation?: number;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   customHeader?: string;
   doNotFind?: boolean;
   dnsIps?: Array<string>;
-  dnsIpsCsv?: string;
   dnsServer?: string;
   enableSslAlert?: boolean;
   finalEndpoint?: string;
@@ -157,7 +152,6 @@ export interface UpdateUptimeTestRequest {
   regions?: Array<string>;
   statusCodesCsv?: string;
   tags?: Array<string>;
-  tagsCsv?: string;
   timeout?: number;
   triggerRate?: number;
   useJar?: boolean;
@@ -182,12 +176,10 @@ export interface UptimeApiInterface {
    * @param {string} [basicPassword] Basic authentication password
    * @param {number} [confirmation] Number of confirmation servers to confirm downtime before an alert is triggered
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {string} [customHeader] JSON object. Represents headers to be sent when making requests
    * @param {boolean} [doNotFind] Whether to consider the check as down if the content is present within the response
    * @param {Array<string>} [dnsIps] List of IP addresses to compare against returned DNS records
-   * @param {string} [dnsIpsCsv] Comma separated list of IP addresses to compare against returned DNS records
-   * @param {string} [dnsServer] Hostname or IP address of the nameserver to query
+   * @param {string} [dnsServer] FQDN or IP address of the nameserver to query
    * @param {boolean} [enableSslAlert] Whether to send an alert if the SSL certificate is soon to expire
    * @param {string} [finalEndpoint] Specify where the redirect chain should end
    * @param {string} [findString] String to look for within the response. Considered down if not found
@@ -201,7 +193,6 @@ export interface UptimeApiInterface {
    * @param {Array<string>} [regions] List of regions on which to run checks. The values required for this parameter can be retrieved from the &#x60;GET /v1/uptime-locations&#x60; endpoint.
    * @param {string} [statusCodesCsv] Comma separated list of status codes that trigger an alert
    * @param {Array<string>} [tags] List of tags
-   * @param {string} [tagsCsv] Comma separated list of tags
    * @param {number} [timeout] The number of seconds to wait to receive the first byte
    * @param {number} [triggerRate] The number of minutes to wait before sending an alert
    * @param {boolean} [useJar] Whether to enable cookie storage
@@ -341,7 +332,7 @@ export interface UptimeApiInterface {
   ): Promise<UptimeTestPeriods>;
 
   /**
-   * Returns a list of uptime checks for an account. Pagination fields are only returned if the account associated with the API key is part of the uptime beta group.
+   * Returns a list of uptime checks for an account.
    * @summary Get all uptime checks
    * @param {'down' | 'up'} [status] Uptime check status
    * @param {number} [page] Page of results
@@ -359,7 +350,7 @@ export interface UptimeApiInterface {
   ): Promise<runtime.ApiResponse<UptimeTests>>;
 
   /**
-   * Returns a list of uptime checks for an account. Pagination fields are only returned if the account associated with the API key is part of the uptime beta group.
+   * Returns a list of uptime checks for an account.
    * Get all uptime checks
    */
   listUptimeTests(
@@ -377,12 +368,10 @@ export interface UptimeApiInterface {
    * @param {string} [basicPassword] Basic authentication password
    * @param {number} [confirmation] Number of confirmation servers to confirm downtime before an alert is triggered
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {string} [customHeader] JSON object. Represents headers to be sent when making requests
    * @param {boolean} [doNotFind] Whether to consider the check as down if the content is present within the response
    * @param {Array<string>} [dnsIps] List of IP addresses to compare against returned DNS records
-   * @param {string} [dnsIpsCsv] Comma separated list of IP addresses to compare against returned DNS records
-   * @param {string} [dnsServer] Hostname or IP address of the nameserver to query
+   * @param {string} [dnsServer] FQDN or IP address of the nameserver to query
    * @param {boolean} [enableSslAlert] Whether to send an alert if the SSL certificate is soon to expire
    * @param {string} [finalEndpoint] Specify where the redirect chain should end
    * @param {string} [findString] String to look for within the response. Considered down if not found
@@ -396,7 +385,6 @@ export interface UptimeApiInterface {
    * @param {Array<string>} [regions] List of regions on which to run checks. The values required for this parameter can be retrieved from the &#x60;GET /v1/uptime-locations&#x60; endpoint.
    * @param {string} [statusCodesCsv] Comma separated list of status codes that trigger an alert
    * @param {Array<string>} [tags] List of tags
-   * @param {string} [tagsCsv] Comma separated list of tags
    * @param {number} [timeout] The number of seconds to wait to receive the first byte
    * @param {number} [triggerRate] The number of minutes to wait before sending an alert
    * @param {boolean} [useJar] Whether to enable cookie storage
@@ -547,13 +535,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
       );
     }
 
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
-      );
-    }
-
     if (requestParameters.customHeader !== undefined) {
       formParams.append('custom_header', requestParameters.customHeader as any);
     }
@@ -567,10 +548,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
         'dns_ips',
         requestParameters.dnsIps.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.dnsIpsCsv !== undefined) {
-      formParams.append('dns_ips_csv', requestParameters.dnsIpsCsv as any);
     }
 
     if (requestParameters.dnsServer !== undefined) {
@@ -648,10 +625,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
         'tags',
         requestParameters.tags.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.tagsCsv !== undefined) {
-      formParams.append('tags_csv', requestParameters.tagsCsv as any);
     }
 
     if (requestParameters.timeout !== undefined) {
@@ -995,7 +968,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime checks for an account. Pagination fields are only returned if the account associated with the API key is part of the uptime beta group.
+   * Returns a list of uptime checks for an account.
    * Get all uptime checks
    */
   async listUptimeTestsRaw(
@@ -1046,7 +1019,7 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
   }
 
   /**
-   * Returns a list of uptime checks for an account. Pagination fields are only returned if the account associated with the API key is part of the uptime beta group.
+   * Returns a list of uptime checks for an account.
    * Get all uptime checks
    */
   async listUptimeTests(
@@ -1139,13 +1112,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
       );
     }
 
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
-      );
-    }
-
     if (requestParameters.customHeader !== undefined) {
       formParams.append('custom_header', requestParameters.customHeader as any);
     }
@@ -1159,10 +1125,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
         'dns_ips',
         requestParameters.dnsIps.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.dnsIpsCsv !== undefined) {
-      formParams.append('dns_ips_csv', requestParameters.dnsIpsCsv as any);
     }
 
     if (requestParameters.dnsServer !== undefined) {
@@ -1240,10 +1202,6 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
         'tags',
         requestParameters.tags.join(runtime.COLLECTION_FORMATS['csv']),
       );
-    }
-
-    if (requestParameters.tagsCsv !== undefined) {
-      formParams.append('tags_csv', requestParameters.tagsCsv as any);
     }
 
     if (requestParameters.timeout !== undefined) {

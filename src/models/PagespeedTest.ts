@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -62,7 +62,7 @@ export interface PagespeedTest {
    */
   name: string;
   /**
-   * URL or IP address of the website under test
+   * URL, FQDN, or IP address of the website under test
    * @type {string}
    * @memberof PagespeedTest
    */
@@ -74,19 +74,22 @@ export interface PagespeedTest {
    */
   checkRate: PagespeedTestCheckRate;
   /**
-   * An alert will be sent if the size of the page is larger than this value (kb). A value of 0 prevents alerts being sent.
+   * An alert will be sent if the size of the page is larger than this
+   * value (kb). A value of 0 prevents alerts being sent.
    * @type {number}
    * @memberof PagespeedTest
    */
   alertBigger: number;
   /**
-   * An alert will be sent if the load time of the page exceeds this value (ms). A value of 0 prevents alerts being sent
+   * An alert will be sent if the load time of the page exceeds this value
+   * (ms). A value of 0 prevents alerts being sent
    * @type {number}
    * @memberof PagespeedTest
    */
   alertSlower: number;
   /**
-   * An alert will be sent if the size of the page is smaller than this value (kb). A value of 0 prevents alerts being sent
+   * An alert will be sent if the size of the page is smaller than this
+   * value (kb). A value of 0 prevents alerts being sent
    * @type {number}
    * @memberof PagespeedTest
    */

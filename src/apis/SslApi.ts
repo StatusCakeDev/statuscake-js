@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0-beta.3
+ * API version: 1.0.0
  * Contact: support@statuscake.com
  */
 
@@ -51,14 +51,12 @@ import {
 export interface CreateSslTestRequest {
   websiteUrl: string;
   checkRate: SSLTestCheckRate;
-  alertAt?: Array<number>;
-  alertAtCsv?: string;
+  alertAt: Array<number>;
   alertBroken?: boolean;
   alertExpiry?: boolean;
   alertMixed?: boolean;
   alertReminder?: boolean;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   followRedirects?: boolean;
   hostname?: string;
   paused?: boolean;
@@ -82,13 +80,11 @@ export interface UpdateSslTestRequest {
   testId: string;
   checkRate?: SSLTestCheckRate;
   alertAt?: Array<number>;
-  alertAtCsv?: string;
   alertBroken?: boolean;
   alertExpiry?: boolean;
   alertMixed?: boolean;
   alertReminder?: boolean;
   contactGroups?: Array<string>;
-  contactGroupsCsv?: string;
   followRedirects?: boolean;
   hostname?: string;
   paused?: boolean;
@@ -107,14 +103,12 @@ export interface SslApiInterface {
    * @summary Create an SSL check
    * @param {string} websiteUrl URL of the server under test. Must begin with https://
    * @param {SSLTestCheckRate} checkRate
-   * @param {Array<number>} [alertAt] List representing when alerts should be sent (days). Must be exactly 3 numerical values
-   * @param {string} [alertAtCsv] Comma separated list representing when alerts should be sent (days). Must be exactly 3 numerical values
+   * @param {Array<number>} alertAt List representing when alerts should be sent (days). Must be exactly 3 numerical values
    * @param {boolean} [alertBroken] Whether to enable alerts when SSL certificate issues are found
    * @param {boolean} [alertExpiry] Whether to enable alerts when the SSL certificate is to expire
    * @param {boolean} [alertMixed] Whether to enable alerts when mixed content is found
    * @param {boolean} [alertReminder] Whether to enable alert reminders
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {boolean} [followRedirects] Whether to follow redirects when testing. Disabled by default
    * @param {string} [hostname] Hostname of the server under test
    * @param {boolean} [paused] Whether the check should be run
@@ -210,13 +204,11 @@ export interface SslApiInterface {
    * @param {string} testId SSL check ID
    * @param {SSLTestCheckRate} [checkRate]
    * @param {Array<number>} [alertAt] List representing when alerts should be sent (days). Must be exactly 3 numerical values
-   * @param {string} [alertAtCsv] Comma separated list representing when alerts should be sent (days). Must be exactly 3 numerical values
    * @param {boolean} [alertBroken] Whether to enable alerts when SSL certificate issues are found
    * @param {boolean} [alertExpiry] Whether to enable alerts when the SSL certificate is to expire
    * @param {boolean} [alertMixed] Whether to enable alerts when mixed content is found
    * @param {boolean} [alertReminder] Whether to enable alert reminders
    * @param {Array<string>} [contactGroups] List of contact group IDs
-   * @param {string} [contactGroupsCsv] Comma separated list of contact group IDs
    * @param {boolean} [followRedirects] Whether to follow redirects when testing. Disabled by default
    * @param {string} [hostname] Hostname of the server under test
    * @param {boolean} [paused] Whether the check should be run
@@ -272,6 +264,16 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       );
     }
 
+    if (
+      requestParameters.alertAt === null ||
+      requestParameters.alertAt === undefined
+    ) {
+      throw new runtime.RequiredError(
+        'alertAt',
+        'Required parameter requestParameters.alertAt was null or undefined when calling createSslTest.',
+      );
+    }
+
     const queryParameters: any = {};
 
     const headerParameters: runtime.HTTPHeaders = {};
@@ -311,10 +313,6 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       );
     }
 
-    if (requestParameters.alertAtCsv !== undefined) {
-      formParams.append('alert_at_csv', requestParameters.alertAtCsv as any);
-    }
-
     if (requestParameters.alertBroken !== undefined) {
       formParams.append('alert_broken', requestParameters.alertBroken as any);
     }
@@ -338,13 +336,6 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       formParams.append(
         'contact_groups',
         requestParameters.contactGroups.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
       );
     }
 
@@ -602,10 +593,6 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       );
     }
 
-    if (requestParameters.alertAtCsv !== undefined) {
-      formParams.append('alert_at_csv', requestParameters.alertAtCsv as any);
-    }
-
     if (requestParameters.alertBroken !== undefined) {
       formParams.append('alert_broken', requestParameters.alertBroken as any);
     }
@@ -629,13 +616,6 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       formParams.append(
         'contact_groups',
         requestParameters.contactGroups.join(runtime.COLLECTION_FORMATS['csv']),
-      );
-    }
-
-    if (requestParameters.contactGroupsCsv !== undefined) {
-      formParams.append(
-        'contact_groups_csv',
-        requestParameters.contactGroupsCsv as any,
       );
     }
 
