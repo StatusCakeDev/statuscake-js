@@ -29,5 +29,9 @@
   },
   "peerDependencies": {
     "isomorphic-fetch": "^3.0.0"
-  }
+  },
+  "files": [
+    "dist/*",
+    "src/*"
+  ]
 }
