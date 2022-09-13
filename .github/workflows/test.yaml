@@ -13,9 +13,6 @@ jobs:
         - "16"
         - "15"
         - "14"
-        include:
-        - node: "16"
-          publish: true
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
@@ -29,11 +26,3 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-npm-
     - run: npm ci
-    - run: npm test
-    - if: ${{ matrix.publish }}
-      run: npm run pact:publish
-      env:
-        PACT_BROKER_BASE_URL: "https://statuscake.pactflow.io"
-        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-        PACT_CONSUMER_APP_VERSION: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
-        PACT_TAG: ${{ github.event_name == 'pull_request' && github.head_ref || 'master' }}
