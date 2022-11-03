@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0
+ * API version: 1.0.1
  * Contact: support@statuscake.com
  */
 
@@ -44,7 +44,6 @@ export interface ListPagespeedMonitoringLocationsRequest {
 }
 
 export interface ListUptimeMonitoringLocationsRequest {
-  location?: string;
   regionCode?: string;
 }
 
@@ -80,7 +79,6 @@ export interface LocationsApiInterface {
   /**
    * Returns a list of locations detailing server information for uptime monitoring servers. This information can be used to create further checks using the API.
    * @summary Get all uptime monitoring locations
-   * @param {string} [location] Alpha-3 ISO 3166-1 country code
    * @param {string} [regionCode] Server region code
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -163,10 +161,6 @@ export class LocationsApi
     initOverrides?: RequestInit,
   ): Promise<runtime.ApiResponse<MonitoringLocations>> {
     const queryParameters: any = {};
-
-    if (requestParameters.location !== undefined) {
-      queryParameters['location'] = requestParameters.location;
-    }
 
     if (requestParameters.regionCode !== undefined) {
       queryParameters['region_code'] = requestParameters.regionCode;
