@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0
+ * API version: 1.0.1
  * Contact: support@statuscake.com
  */
 
@@ -104,18 +104,21 @@ export interface ListUptimeTestAlertsRequest {
   testId: string;
   limit?: number;
   before?: number;
+  after?: number;
 }
 
 export interface ListUptimeTestHistoryRequest {
   testId: string;
   limit?: number;
   before?: number;
+  after?: number;
 }
 
 export interface ListUptimeTestPeriodsRequest {
   testId: string;
   limit?: number;
   before?: number;
+  after?: number;
 }
 
 export interface ListUptimeTestsRequest {
@@ -265,6 +268,7 @@ export interface UptimeApiInterface {
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of uptime alerts to return per page
    * @param {number} [before] Only alerts triggered before this UNIX timestamp will be returned
+   * @param {number} [after] Only alerts triggered after this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -289,6 +293,7 @@ export interface UptimeApiInterface {
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of results to return per page
    * @param {number} [before] Only results created before this UNIX timestamp will be returned
+   * @param {number} [after] Only results created after this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -313,6 +318,7 @@ export interface UptimeApiInterface {
    * @param {string} testId Uptime check ID
    * @param {number} [limit] The number of uptime check periods to return per page
    * @param {number} [before] Only check periods created before this UNIX timestamp will be returned
+   * @param {number} [after] Only check periods created after this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof UptimeApiInterface
@@ -806,6 +812,10 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
       queryParameters['before'] = requestParameters.before;
     }
 
+    if (requestParameters.after !== undefined) {
+      queryParameters['after'] = requestParameters.after;
+    }
+
     const headerParameters: runtime.HTTPHeaders = {};
 
     const response = await this.request(
@@ -869,6 +879,10 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
       queryParameters['before'] = requestParameters.before;
     }
 
+    if (requestParameters.after !== undefined) {
+      queryParameters['after'] = requestParameters.after;
+    }
+
     const headerParameters: runtime.HTTPHeaders = {};
 
     const response = await this.request(
@@ -930,6 +944,10 @@ export class UptimeApi extends runtime.BaseAPI implements UptimeApiInterface {
 
     if (requestParameters.before !== undefined) {
       queryParameters['before'] = requestParameters.before;
+    }
+
+    if (requestParameters.after !== undefined) {
+      queryParameters['after'] = requestParameters.after;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};

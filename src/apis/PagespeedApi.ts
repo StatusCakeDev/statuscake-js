@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.0
+ * API version: 1.0.1
  * Contact: support@statuscake.com
  */
 
@@ -78,6 +78,7 @@ export interface ListPagespeedTestHistoryRequest {
   testId: string;
   limit?: number;
   before?: number;
+  after?: number;
 }
 
 export interface ListPagespeedTestsRequest {
@@ -184,6 +185,7 @@ export interface PagespeedApiInterface {
    * @param {string} testId Pagespeed check ID
    * @param {number} [limit] The number of results to return from the series
    * @param {number} [before] Only results created before this UNIX timestamp will be returned
+   * @param {number} [after] Only results created after this UNIX timestamp will be returned
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof PagespeedApiInterface
@@ -545,6 +547,10 @@ export class PagespeedApi
 
     if (requestParameters.before !== undefined) {
       queryParameters['before'] = requestParameters.before;
+    }
+
+    if (requestParameters.after !== undefined) {
+      queryParameters['after'] = requestParameters.after;
     }
 
     const headerParameters: runtime.HTTPHeaders = {};
