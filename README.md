@@ -33,11 +33,6 @@ client and execute a request:
 import 'isomorphic-fetch';
 import {
   Configuration,
-  ContactGroupsApi,
-  LocationsApi,
-  MaintenanceWindowsApi,
-  PagespeedApi,
-  SslApi,
   UptimeApi,
 } from '@statuscake/statuscake-js';
 
