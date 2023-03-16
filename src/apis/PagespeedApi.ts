@@ -3,7 +3,7 @@
 /*
  * StatusCake API
  *
- * Copyright (c) 2022
+ * Copyright (c) 2023
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.1
+ * API version: 1.1.0
  * Contact: support@statuscake.com
  */
 
@@ -89,6 +89,7 @@ export interface ListPagespeedTestsRequest {
 export interface UpdatePagespeedTestRequest {
   testId: string;
   name?: string;
+  websiteUrl?: string;
   checkRate?: PagespeedTestCheckRate;
   alertBigger?: number;
   alertSlower?: number;
@@ -232,6 +233,7 @@ export interface PagespeedApiInterface {
    * @summary Update a pagespeed check
    * @param {string} testId Pagespeed check ID
    * @param {string} [name] Name of the check
+   * @param {string} [websiteUrl] URL, FQDN, or IP address of the website under test
    * @param {PagespeedTestCheckRate} [checkRate]
    * @param {number} [alertBigger] An alert will be sent if the size of the page is larger than this value (kb). A value of 0 prevents alerts being sent.
    * @param {number} [alertSlower] An alert will be sent if the load time of the page exceeds this value (ms). A value of 0 prevents alerts being sent
@@ -676,6 +678,10 @@ export class PagespeedApi
 
     if (requestParameters.name !== undefined) {
       formParams.append('name', requestParameters.name as any);
+    }
+
+    if (requestParameters.websiteUrl !== undefined) {
+      formParams.append('website_url', requestParameters.websiteUrl as any);
     }
 
     if (requestParameters.checkRate !== undefined) {

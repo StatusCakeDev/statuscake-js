@@ -3,7 +3,7 @@
 /*
  * StatusCake API
  *
- * Copyright (c) 2022
+ * Copyright (c) 2023
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.0.1
+ * API version: 1.1.0
  * Contact: support@statuscake.com
  */
 
@@ -78,6 +78,7 @@ export interface ListSslTestsRequest {
 
 export interface UpdateSslTestRequest {
   testId: string;
+  websiteUrl?: string;
   checkRate?: SSLTestCheckRate;
   alertAt?: Array<number>;
   alertBroken?: boolean;
@@ -202,6 +203,7 @@ export interface SslApiInterface {
    * Updates an SSL check with the given parameters.
    * @summary Update an SSL check
    * @param {string} testId SSL check ID
+   * @param {string} [websiteUrl] URL of the server under test. Must begin with https://
    * @param {SSLTestCheckRate} [checkRate]
    * @param {Array<number>} [alertAt] List representing when alerts should be sent (days). Must be exactly 3 numerical values
    * @param {boolean} [alertBroken] Whether to enable alerts when SSL certificate issues are found
@@ -574,6 +576,10 @@ export class SslApi extends runtime.BaseAPI implements SslApiInterface {
       formParams = new FormData();
     } else {
       formParams = new URLSearchParams();
+    }
+
+    if (requestParameters.websiteUrl !== undefined) {
+      formParams.append('website_url', requestParameters.websiteUrl as any);
     }
 
     if (requestParameters.checkRate !== undefined) {
