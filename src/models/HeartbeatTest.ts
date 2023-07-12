@@ -31,120 +31,115 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-  UptimeTestCheckRate,
-  UptimeTestCheckRateFromJSON,
-  UptimeTestCheckRateFromJSONTyped,
-  UptimeTestCheckRateToJSON,
-} from './UptimeTestCheckRate';
-import {
-  UptimeTestStatus,
-  UptimeTestStatusFromJSON,
-  UptimeTestStatusFromJSONTyped,
-  UptimeTestStatusToJSON,
-} from './UptimeTestStatus';
-import {
-  UptimeTestType,
-  UptimeTestTypeFromJSON,
-  UptimeTestTypeFromJSONTyped,
-  UptimeTestTypeToJSON,
-} from './UptimeTestType';
+  HeartbeatTestStatus,
+  HeartbeatTestStatusFromJSON,
+  HeartbeatTestStatusFromJSONTyped,
+  HeartbeatTestStatusToJSON,
+} from './HeartbeatTestStatus';
 
 /**
  *
  * @export
- * @interface UptimeTestOverview
+ * @interface HeartbeatTest
  */
-export interface UptimeTestOverview {
+export interface HeartbeatTest {
   /**
-   * Uptime check ID
+   * Heartbeat check ID
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
   id: string;
   /**
    * Name of the check
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
   name: string;
   /**
-   * URL or IP address of the server under test
+   * URL of the check
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
-  websiteUrl: string;
+  url: string;
   /**
-   *
-   * @type {UptimeTestType}
-   * @memberof UptimeTestOverview
+   * Number of seconds since the last ping before the check is considered down
+   * @type {number}
+   * @memberof HeartbeatTest
    */
-  testType: UptimeTestType;
-  /**
-   *
-   * @type {UptimeTestCheckRate}
-   * @memberof UptimeTestOverview
-   */
-  checkRate: UptimeTestCheckRate;
+  period: number;
   /**
    * List of contact group IDs
    * @type {Array<string>}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
   contactGroups: Array<string>;
   /**
+   * Name of the hosting provider
+   * @type {string}
+   * @memberof HeartbeatTest
+   */
+  host?: string;
+  /**
+   * When the check was last run (RFC3339 format)
+   * @type {Date}
+   * @memberof HeartbeatTest
+   */
+  lastTestedAt?: Date;
+  /**
    * Whether the check should be run
    * @type {boolean}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
   paused: boolean;
   /**
    *
-   * @type {UptimeTestStatus}
-   * @memberof UptimeTestOverview
+   * @type {HeartbeatTestStatus}
+   * @memberof HeartbeatTest
    */
-  status: UptimeTestStatus;
+  status: HeartbeatTestStatus;
   /**
    * List of tags
    * @type {Array<string>}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
   tags: Array<string>;
   /**
    * Uptime percentage for a check
    * @type {number}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTest
    */
-  uptime?: number;
+  uptime: number;
 }
 
-export function UptimeTestOverviewFromJSON(json: any): UptimeTestOverview {
-  return UptimeTestOverviewFromJSONTyped(json, false);
+export function HeartbeatTestFromJSON(json: any): HeartbeatTest {
+  return HeartbeatTestFromJSONTyped(json, false);
 }
 
-export function UptimeTestOverviewFromJSONTyped(
+export function HeartbeatTestFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): UptimeTestOverview {
+): HeartbeatTest {
   if (json === undefined || json === null) {
     return json;
   }
   return {
     id: json['id'],
     name: json['name'],
-    websiteUrl: json['website_url'],
-    testType: UptimeTestTypeFromJSON(json['test_type']),
-    checkRate: UptimeTestCheckRateFromJSON(json['check_rate']),
+    url: json['url'],
+    period: json['period'],
     contactGroups: json['contact_groups'],
+    host: !exists(json, 'host') ? undefined : json['host'],
+    lastTestedAt: !exists(json, 'last_tested_at')
+      ? undefined
+      : new Date(json['last_tested_at']),
     paused: json['paused'],
-    status: UptimeTestStatusFromJSON(json['status']),
+    status: HeartbeatTestStatusFromJSON(json['status']),
     tags: json['tags'],
-    uptime: !exists(json, 'uptime') ? undefined : json['uptime'],
+    uptime: json['uptime'],
   };
 }
 
-export function UptimeTestOverviewToJSON(
-  value?: UptimeTestOverview | null,
-): any {
+export function HeartbeatTestToJSON(value?: HeartbeatTest | null): any {
   if (value === undefined) {
     return undefined;
   }
@@ -154,12 +149,16 @@ export function UptimeTestOverviewToJSON(
   return {
     id: value.id,
     name: value.name,
-    website_url: value.websiteUrl,
-    test_type: UptimeTestTypeToJSON(value.testType),
-    check_rate: UptimeTestCheckRateToJSON(value.checkRate),
+    url: value.url,
+    period: value.period,
     contact_groups: value.contactGroups,
+    host: value.host,
+    last_tested_at:
+      value.lastTestedAt === undefined
+        ? undefined
+        : value.lastTestedAt.toISOString(),
     paused: value.paused,
-    status: UptimeTestStatusToJSON(value.status),
+    status: HeartbeatTestStatusToJSON(value.status),
     tags: value.tags,
     uptime: value.uptime,
   };

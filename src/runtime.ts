@@ -23,7 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  *
- * API version: 1.1.0
+ * API version: 1.2.0
  * Contact: support@statuscake.com
  */
 
@@ -154,7 +154,10 @@ export class BaseAPI {
 
 export class RequiredError extends Error {
   name: 'RequiredError' = 'RequiredError';
-  constructor(public field: string, msg?: string) {
+  constructor(
+    public field: string,
+    msg?: string,
+  ) {
     super(msg);
   }
 }
