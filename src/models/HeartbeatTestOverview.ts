@@ -31,119 +31,102 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-  UptimeTestCheckRate,
-  UptimeTestCheckRateFromJSON,
-  UptimeTestCheckRateFromJSONTyped,
-  UptimeTestCheckRateToJSON,
-} from './UptimeTestCheckRate';
-import {
-  UptimeTestStatus,
-  UptimeTestStatusFromJSON,
-  UptimeTestStatusFromJSONTyped,
-  UptimeTestStatusToJSON,
-} from './UptimeTestStatus';
-import {
-  UptimeTestType,
-  UptimeTestTypeFromJSON,
-  UptimeTestTypeFromJSONTyped,
-  UptimeTestTypeToJSON,
-} from './UptimeTestType';
+  HeartbeatTestStatus,
+  HeartbeatTestStatusFromJSON,
+  HeartbeatTestStatusFromJSONTyped,
+  HeartbeatTestStatusToJSON,
+} from './HeartbeatTestStatus';
 
 /**
  *
  * @export
- * @interface UptimeTestOverview
+ * @interface HeartbeatTestOverview
  */
-export interface UptimeTestOverview {
+export interface HeartbeatTestOverview {
   /**
-   * Uptime check ID
+   * Heartbeat check ID
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   id: string;
   /**
    * Name of the check
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   name: string;
   /**
-   * URL or IP address of the server under test
+   * URL of the check
    * @type {string}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
-  websiteUrl: string;
+  url: string;
   /**
-   *
-   * @type {UptimeTestType}
-   * @memberof UptimeTestOverview
+   * Number of seconds since the last ping before the check is considered down
+   * @type {number}
+   * @memberof HeartbeatTestOverview
    */
-  testType: UptimeTestType;
-  /**
-   *
-   * @type {UptimeTestCheckRate}
-   * @memberof UptimeTestOverview
-   */
-  checkRate: UptimeTestCheckRate;
+  period: number;
   /**
    * List of contact group IDs
    * @type {Array<string>}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   contactGroups: Array<string>;
   /**
    * Whether the check should be run
    * @type {boolean}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   paused: boolean;
   /**
    *
-   * @type {UptimeTestStatus}
-   * @memberof UptimeTestOverview
+   * @type {HeartbeatTestStatus}
+   * @memberof HeartbeatTestOverview
    */
-  status: UptimeTestStatus;
+  status: HeartbeatTestStatus;
   /**
    * List of tags
    * @type {Array<string>}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   tags: Array<string>;
   /**
    * Uptime percentage for a check
    * @type {number}
-   * @memberof UptimeTestOverview
+   * @memberof HeartbeatTestOverview
    */
   uptime?: number;
 }
 
-export function UptimeTestOverviewFromJSON(json: any): UptimeTestOverview {
-  return UptimeTestOverviewFromJSONTyped(json, false);
+export function HeartbeatTestOverviewFromJSON(
+  json: any,
+): HeartbeatTestOverview {
+  return HeartbeatTestOverviewFromJSONTyped(json, false);
 }
 
-export function UptimeTestOverviewFromJSONTyped(
+export function HeartbeatTestOverviewFromJSONTyped(
   json: any,
   ignoreDiscriminator: boolean,
-): UptimeTestOverview {
+): HeartbeatTestOverview {
   if (json === undefined || json === null) {
     return json;
   }
   return {
     id: json['id'],
     name: json['name'],
-    websiteUrl: json['website_url'],
-    testType: UptimeTestTypeFromJSON(json['test_type']),
-    checkRate: UptimeTestCheckRateFromJSON(json['check_rate']),
+    url: json['url'],
+    period: json['period'],
     contactGroups: json['contact_groups'],
     paused: json['paused'],
-    status: UptimeTestStatusFromJSON(json['status']),
+    status: HeartbeatTestStatusFromJSON(json['status']),
     tags: json['tags'],
     uptime: !exists(json, 'uptime') ? undefined : json['uptime'],
   };
 }
 
-export function UptimeTestOverviewToJSON(
-  value?: UptimeTestOverview | null,
+export function HeartbeatTestOverviewToJSON(
+  value?: HeartbeatTestOverview | null,
 ): any {
   if (value === undefined) {
     return undefined;
@@ -154,12 +137,11 @@ export function UptimeTestOverviewToJSON(
   return {
     id: value.id,
     name: value.name,
-    website_url: value.websiteUrl,
-    test_type: UptimeTestTypeToJSON(value.testType),
-    check_rate: UptimeTestCheckRateToJSON(value.checkRate),
+    url: value.url,
+    period: value.period,
     contact_groups: value.contactGroups,
     paused: value.paused,
-    status: UptimeTestStatusToJSON(value.status),
+    status: HeartbeatTestStatusToJSON(value.status),
     tags: value.tags,
     uptime: value.uptime,
   };
