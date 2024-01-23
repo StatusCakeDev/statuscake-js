@@ -4,6 +4,8 @@ extends: default
 ignore: |
   node_modules/
 rules:
+  document-start:
+    level: error
   indentation:
     indent-sequences: false
     spaces: 2
