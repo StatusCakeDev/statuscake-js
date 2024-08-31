@@ -9,9 +9,9 @@ can be found [here](https://www.statuscake.com/api/v1).
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+You will need the following things properly installed on your computer:
 
-* [Node.js](https://nodejs.org/en/): any one of the **three latest major**
+- [Node.js](https://nodejs.org/en/): any one of the **three latest major**
   [releases](https://nodejs.org/en/)
 
 ## Installation
@@ -50,4 +50,4 @@ service.listUptimeTests()
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md).
+This project is licensed under the [MIT License](LICENSE).

@@ -13,9 +13,9 @@ jobs:
     strategy:
       matrix:
         node:
-        - "19"
-        - "18"
-        - "16"  # 17 does not work ¯\_(ツ)_/¯
+        - "22"
+        - "21"
+        - "20"
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
