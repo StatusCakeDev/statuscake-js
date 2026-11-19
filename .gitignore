@@ -21,3 +21,4 @@
 # is intended to run in multiple environments; otherwise, check them in:
 .node-version
 .nvmrc
+package-lock.json

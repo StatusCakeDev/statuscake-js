@@ -1,40 +1,63 @@
 {
   "name": "@statuscake/statuscake-js",
-  "version": "1.2.0-beta.1",
+  "version": "1.2.0",
   "description": "StatusCake API client",
   "keywords": [
     "sdk",
     "statuscake",
     "javascript"
   ],
-  "repository": "https://github.com/StatusCakeDev/statuscake-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StatusCakeDev/statuscake-js.git"
+  },
   "license": "MIT",
   "author": {
     "name": "StatusCake",
     "email": "support@statuscake.com",
     "url": "https://www.statuscake.com"
   },
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
+  "type": "commonjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build"
-  },
-  "devDependencies": {
-    "typescript": "^4.0"
-  },
-  "peerDependencies": {
-    "isomorphic-fetch": "^3.0.0"
-  },
+  "sideEffects": false,
   "files": [
-    "dist/*",
-    "src/*"
+    "dist"
   ],
   "engines": {
-    "node": ">=19"
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && node scripts/mark-module-types.mjs",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "lint": "eslint .",
+    "check:package": "publint && attw --pack . --profile node16",
+    "prepack": "npm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^20.19.43",
+    "eslint": "^10.14.0",
+    "publint": "^0.3.25",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^3.2.7"
   }
 }

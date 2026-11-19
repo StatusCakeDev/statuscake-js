@@ -1,31 +1,18 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "lib": [
-      "es6",
-      "dom",
-      "es2017"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noLib": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "outDir": "dist",
-    "rootDir": "src",
+    "target": "ES2020",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
     "strict": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "rootDir": "."
   },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
-  "filesGlob": [
-    "./**/*.ts"
-  ]
+  "include": ["src", "tests"],
+  "exclude": ["dist", "node_modules"]
 }
