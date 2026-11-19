@@ -1,8 +1,6 @@
 # vi: ft=yaml
 ---
 extends: default
-ignore: |
-  node_modules/
 rules:
   document-start:
     level: error
