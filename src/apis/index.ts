@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './ContactGroupsApi';
-export * from './HeartbeatApi';
-export * from './LocationsApi';
-export * from './MaintenanceWindowsApi';
-export * from './PagespeedApi';
-export * from './SslApi';
-export * from './UptimeApi';
+export * from './ContactGroupsApi.js';
+export * from './HeartbeatApi.js';
+export * from './LocationsApi.js';
+export * from './MaintenanceWindowsApi.js';
+export * from './PagespeedApi.js';
+export * from './SslApi.js';
+export * from './UptimeApi.js';
